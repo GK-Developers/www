@@ -148,10 +148,10 @@ function HealthVisualization() {
         {/* Health score text */}
         <motion.text
           x="200"
-          y="195"
+          y="208"
           textAnchor="middle"
           fill="white"
-          fontSize="16"
+          fontSize="24"
           fontWeight="700"
           fontFamily="var(--font-display)"
           initial={{ opacity: 0 }}
@@ -159,21 +159,6 @@ function HealthVisualization() {
           transition={{ delay: 1.5, duration: 0.8 }}
         >
           98
-        </motion.text>
-        <motion.text
-          x="200"
-          y="212"
-          textAnchor="middle"
-          fill="white"
-          fontSize="7"
-          fontWeight="500"
-          opacity={0.8}
-          fontFamily="var(--font-body)"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ delay: 1.7, duration: 0.8 }}
-        >
-          HEALTH
         </motion.text>
       </svg>
     </div>
