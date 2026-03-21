@@ -9,15 +9,15 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-surface-200 bg-surface-50">
+    <footer style={{ background: "#0d1a14" }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-10">
           {/* Left — Branding */}
           <div>
-            <span className="font-display text-lg font-semibold text-ink-900 tracking-tight">
+            <span className="font-display text-lg font-semibold text-white tracking-tight">
               GK Healter
             </span>
-            <p className="mt-2 text-sm text-ink-400 max-w-xs leading-relaxed">
+            <p className="mt-2 text-sm text-white/60 max-w-xs leading-relaxed">
               Professional system maintenance and security auditing for Linux.
             </p>
           </div>
@@ -30,7 +30,7 @@ export default function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-ink-400 hover:text-ink-900 transition-colors duration-200"
+                className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors duration-200"
               >
                 <link.icon className="h-4 w-4" />
                 {link.label}
@@ -39,19 +39,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-surface-200">
-          <p className="text-sm text-ink-300">
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <p className="text-sm text-white/40">
             Built by{" "}
-            <span className="text-ink-500 font-medium">
+            <span className="text-white/80 font-medium">
               Egehan KAHRAMAN
             </span>{" "}
             &{" "}
-            <span className="text-ink-500 font-medium">
+            <span className="text-white/80 font-medium">
               Mustafa GÖKPINAR
             </span>{" "}
             — GK Developers
           </p>
-          <p className="mt-2 text-xs text-ink-300">
+          <p className="mt-2 text-xs text-white/40">
             © 2025 GK Developers. Licensed under GPL-3.0.
           </p>
         </div>

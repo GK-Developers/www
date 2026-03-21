@@ -41,8 +41,21 @@ const cardVariants = {
 
 export default function Features() {
   return (
-    <section id="features" className="py-28 lg:py-36 bg-surface-50">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="features"
+      className="relative py-28 lg:py-36"
+      style={{ background: "#f8fdfb" }}
+    >
+      {/* Subtle radial gradient overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(26,107,74,0.04), transparent)",
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

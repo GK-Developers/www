@@ -16,33 +16,27 @@ export default function SectionTransition({
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start 95%", "start 20%"],
   });
 
-  const scale = useTransform(
+  const clipPath = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.85, 1],
-    [0.92, 1, 1, 0.96]
+    [0, 1],
+    ["inset(0% 0% 100% 0%)", "inset(0% 0% 0% 0%)"]
   );
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.15, 0.85, 1],
-    [0, 1, 1, 0]
-  );
-
-  const blur = useTransform(scrollYProgress, [0, 0.15], ["8px", "0px"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
 
   return (
     <motion.div
       ref={ref}
       id={id}
       style={{
-        scale,
+        clipPath,
         opacity,
-        filter: blur,
+        overflow: "hidden",
+        willChange: "clip-path",
         position: "relative",
-        willChange: "transform",
       }}
     >
       {children}

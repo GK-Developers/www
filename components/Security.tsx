@@ -24,8 +24,26 @@ const itemVariants = {
 
 export default function Security() {
   return (
-    <section id="security" className="py-28 lg:py-36 bg-surface-50">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="security"
+      className="relative py-28 lg:py-36 overflow-hidden"
+      style={{ background: "#f0faf5" }}
+    >
+      {/* Static blurred circle — top-right atmosphere */}
+      <div
+        className="absolute pointer-events-none"
+        aria-hidden="true"
+        style={{
+          top: "-100px",
+          right: "-100px",
+          width: "400px",
+          height: "400px",
+          borderRadius: "50%",
+          background: "rgba(26,107,74,0.06)",
+          filter: "blur(80px)",
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

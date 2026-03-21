@@ -338,7 +338,15 @@ export default function Architecture() {
   const pulseEdges = [EDGES[0], EDGES[2], EDGES[4], EDGES[10]];
 
   return (
-    <section id="architecture" ref={sectionRef} className="py-28 lg:py-36">
+    <section
+      id="architecture"
+      ref={sectionRef}
+      className="py-28 lg:py-36"
+      style={{
+        background: "#ffffff",
+        borderTop: "1px solid rgba(26,107,74,0.08)",
+      }}
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <motion.div
