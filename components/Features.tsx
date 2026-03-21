@@ -44,17 +44,8 @@ export default function Features() {
     <section
       id="features"
       className="relative py-28 lg:py-36"
-      style={{ background: "#f8fdfb" }}
+      style={{ background: "transparent" }}
     >
-      {/* Subtle radial gradient overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(26,107,74,0.04), transparent)",
-        }}
-      />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,10 +54,16 @@ export default function Features() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
+          <h2
+            className="font-display text-3xl sm:text-4xl font-bold tracking-tight"
+            style={{ color: "#e8f5ee" }}
+          >
             Everything your system needs
           </h2>
-          <p className="mt-4 text-lg text-ink-400 leading-relaxed">
+          <p
+            className="mt-4 text-lg leading-relaxed"
+            style={{ color: "#8ab89a" }}
+          >
             Six integrated modules working together to keep your Linux system
             clean, fast, and secure.
           </p>
@@ -85,16 +82,47 @@ export default function Features() {
               <motion.div
                 key={feature.title}
                 variants={cardVariants}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group rounded-2xl border border-surface-200 bg-surface-0 p-7 hover:border-forest-200 hover:shadow-lg hover:shadow-forest-600/5 transition-all duration-300"
+                whileHover={{
+                  scale: 1.02,
+                  y: -4,
+                  transition: { duration: 0.2 },
+                }}
+                className="group rounded-xl p-7 transition-all duration-300 cursor-pointer"
+                style={{
+                  background: "rgba(13, 26, 20, 0.60)",
+                  border: "1px solid rgba(26, 107, 74, 0.20)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  borderRadius: "12px",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(26, 107, 74, 0.50)";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 20px rgba(26, 107, 74, 0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(26, 107, 74, 0.20)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               >
-                <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-forest-50 text-forest-600 mb-5 group-hover:bg-forest-100 transition-colors duration-300">
+                <div
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-5"
+                  style={{ color: "#3dd68c" }}
+                >
                   {Icon && <Icon className="h-5 w-5" strokeWidth={1.8} />}
                 </div>
-                <h3 className="font-display text-lg font-semibold text-ink-900">
+                <h3
+                  className="font-display text-lg font-semibold"
+                  style={{ color: "#e8f5ee" }}
+                >
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-sm text-ink-400 leading-relaxed">
+                <p
+                  className="mt-2 text-sm leading-relaxed"
+                  style={{ color: "#8ab89a" }}
+                >
                   {feature.description}
                 </p>
               </motion.div>

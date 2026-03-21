@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import { TECH_STACK } from "@/lib/constants";
 
 /* ------------------------------------------------------------------ */
@@ -116,7 +116,7 @@ function AnimatedEdge({
       <motion.path
         d={d}
         fill="none"
-        stroke={highlighted ? "var(--color-forest-500)" : "var(--color-surface-300)"}
+        stroke={highlighted ? "#3dd68c" : "rgba(26, 107, 74, 0.40)"}
         strokeWidth={highlighted ? 2 : 1.5}
         strokeDasharray={edge.dashed ? "6 4" : "none"}
         initial={{ pathLength: 0, opacity: 0 }}
@@ -132,7 +132,7 @@ function AnimatedEdge({
           x={(x1 + x2) / 2 + 8}
           y={midY - 4}
           textAnchor="middle"
-          fill="var(--color-ink-300)"
+          fill="#8ab89a"
           fontSize="9"
           fontFamily="var(--font-body)"
           initial={{ opacity: 0 }}
@@ -159,7 +159,7 @@ function PulseDot({ edge, delay }: { edge: Edge; delay: number }) {
   return (
     <motion.circle
       r="3"
-      fill="var(--color-forest-500)"
+      fill="#3dd68c"
       initial={{ opacity: 0 }}
       animate={{ opacity: [0, 1, 1, 0] }}
       transition={{
@@ -200,6 +200,19 @@ function GraphNodeBox({
   const halfW = node.w / 2;
   const halfH = node.h / 2;
 
+  // Dark theme node colors
+  const getBgFill = () => {
+    if (node.accent) return "#1a6b4a";
+    if (node.engine) return "rgba(26, 107, 74, 0.20)";
+    return "rgba(13, 26, 20, 0.60)";
+  };
+
+  const getStroke = () => {
+    if (node.accent) return "#2a9e6e";
+    if (node.engine) return "#3dd68c";
+    return "rgba(26, 107, 74, 0.20)";
+  };
+
   return (
     <motion.g
       onMouseEnter={onHover}
@@ -217,7 +230,7 @@ function GraphNodeBox({
         width={node.w}
         height={node.h}
         rx={12}
-        fill="rgba(0,0,0,0.04)"
+        fill="rgba(0,0,0,0.2)"
       />
 
       {/* Background */}
@@ -227,14 +240,8 @@ function GraphNodeBox({
         width={node.w}
         height={node.h}
         rx={12}
-        fill={node.accent ? "var(--color-forest-600)" : "var(--color-surface-0)"}
-        stroke={
-          node.accent
-            ? "var(--color-forest-700)"
-            : node.engine
-            ? "var(--color-forest-300)"
-            : "var(--color-surface-300)"
-        }
+        fill={getBgFill()}
+        stroke={getStroke()}
         strokeWidth={node.accent ? 0 : 1.5}
         animate={{
           scale: isHovered ? 1.04 : 1,
@@ -251,7 +258,7 @@ function GraphNodeBox({
           width={3.5}
           height={node.h - 12}
           rx={2}
-          fill="var(--color-forest-500)"
+          fill="#3dd68c"
         />
       )}
 
@@ -260,7 +267,7 @@ function GraphNodeBox({
         x={node.x}
         y={node.sub ? node.y - 4 : node.y + 4}
         textAnchor="middle"
-        fill={node.accent ? "white" : "var(--color-ink-900)"}
+        fill={node.accent ? "#e8f5ee" : "#e8f5ee"}
         fontSize={node.accent ? 13 : 12}
         fontWeight="600"
         fontFamily="var(--font-display)"
@@ -274,7 +281,7 @@ function GraphNodeBox({
           x={node.x}
           y={node.y + 12}
           textAnchor="middle"
-          fill={node.accent ? "rgba(255,255,255,0.8)" : "var(--color-ink-400)"}
+          fill={node.accent ? "rgba(232,245,238,0.8)" : "#8ab89a"}
           fontSize="9.5"
           fontFamily="var(--font-body)"
         >
@@ -295,13 +302,15 @@ function GraphNodeBox({
             width={160}
             height={24}
             rx={6}
-            fill="var(--color-ink-900)"
+            fill="rgba(13, 26, 20, 0.90)"
+            stroke="rgba(26, 107, 74, 0.30)"
+            strokeWidth={1}
           />
           <text
             x={node.x}
             y={node.y + halfH + 22}
             textAnchor="middle"
-            fill="white"
+            fill="#e8f5ee"
             fontSize="9"
             fontFamily="var(--font-body)"
           >
@@ -342,10 +351,7 @@ export default function Architecture() {
       id="architecture"
       ref={sectionRef}
       className="py-28 lg:py-36"
-      style={{
-        background: "#ffffff",
-        borderTop: "1px solid rgba(26,107,74,0.08)",
-      }}
+      style={{ background: "transparent" }}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
@@ -356,10 +362,16 @@ export default function Architecture() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
+          <h2
+            className="font-display text-3xl sm:text-4xl font-bold tracking-tight"
+            style={{ color: "#e8f5ee" }}
+          >
             How It Works at Runtime
           </h2>
-          <p className="mt-4 text-lg text-ink-400 leading-relaxed">
+          <p
+            className="mt-4 text-lg leading-relaxed"
+            style={{ color: "#8ab89a" }}
+          >
             A top-to-bottom flow from user action through authentication, core
             engines, and supporting services. Every module has one job.
           </p>
@@ -371,7 +383,13 @@ export default function Architecture() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-16 rounded-2xl border border-surface-200 bg-surface-50 p-4 sm:p-8 overflow-x-auto"
+          className="mt-16 rounded-2xl p-4 sm:p-8 overflow-x-auto"
+          style={{
+            background: "rgba(13, 26, 20, 0.60)",
+            border: "1px solid rgba(26, 107, 74, 0.20)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+          }}
         >
           <svg
             viewBox="0 0 860 520"
@@ -380,10 +398,10 @@ export default function Architecture() {
             aria-label="Interactive architecture node graph"
           >
             {/* Layer labels */}
-            <text x="24" y="54" fill="var(--color-forest-600)" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">USER</text>
-            <text x="24" y="174" fill="var(--color-ink-300)" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">UI</text>
-            <text x="24" y="314" fill="var(--color-forest-600)" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">CORE</text>
-            <text x="24" y="454" fill="var(--color-ink-300)" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">SUPPORT</text>
+            <text x="24" y="54" fill="#3dd68c" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">USER</text>
+            <text x="24" y="174" fill="#8ab89a" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">UI</text>
+            <text x="24" y="314" fill="#3dd68c" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">CORE</text>
+            <text x="24" y="454" fill="#8ab89a" fontSize="9" fontWeight="700" fontFamily="var(--font-display)" letterSpacing="0.08em">SUPPORT</text>
 
             {/* Edges (render behind nodes) */}
             {EDGES.map((edge, i) => (
@@ -423,23 +441,42 @@ export default function Architecture() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-12"
         >
-          <h3 className="font-display text-xl font-semibold text-ink-900 mb-6">
+          <h3
+            className="font-display text-xl font-semibold mb-6"
+            style={{ color: "#e8f5ee" }}
+          >
             Tech Stack
           </h3>
-          <div className="overflow-hidden rounded-xl border border-surface-200">
+          <div
+            className="overflow-hidden rounded-xl"
+            style={{
+              background: "rgba(13, 26, 20, 0.60)",
+              border: "1px solid rgba(26, 107, 74, 0.20)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+            }}
+          >
             <table className="w-full text-sm">
               <tbody>
                 {TECH_STACK.map((item, i) => (
                   <tr
                     key={item.label}
-                    className={
-                      i % 2 === 0 ? "bg-surface-0" : "bg-surface-50"
-                    }
+                    style={{
+                      background:
+                        i % 2 === 0
+                          ? "transparent"
+                          : "rgba(26, 107, 74, 0.05)",
+                    }}
                   >
-                    <td className="px-6 py-4 font-medium text-ink-700 w-40 font-display">
+                    <td
+                      className="px-6 py-4 font-medium w-40 font-display"
+                      style={{ color: "#e8f5ee" }}
+                    >
                       {item.label}
                     </td>
-                    <td className="px-6 py-4 text-ink-400">{item.value}</td>
+                    <td className="px-6 py-4" style={{ color: "#8ab89a" }}>
+                      {item.value}
+                    </td>
                   </tr>
                 ))}
               </tbody>

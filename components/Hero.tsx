@@ -23,22 +23,34 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-forest-200 bg-forest-50 px-4 py-1.5 text-xs font-medium text-forest-700 mb-8"
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium mb-8"
+            style={{
+              background: "rgba(26, 107, 74, 0.15)",
+              border: "1px solid rgba(26, 107, 74, 0.3)",
+              color: "#3dd68c",
+            }}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-forest-500" />
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: "#3dd68c" }}
+            />
             Open Source · GPL-3.0
           </motion.div>
 
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-ink-900 leading-[1.08]">
+          <h1
+            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+            style={{ color: "#e8f5ee" }}
+          >
             Your Linux System,{" "}
-            <span className="text-forest-600">Always Healthy</span>
+            <span style={{ color: "#3dd68c" }}>Always Healthy</span>
           </h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-6 text-lg sm:text-xl text-ink-400 leading-relaxed max-w-lg"
+            className="mt-6 text-lg sm:text-xl leading-relaxed max-w-lg"
+            style={{ color: "#8ab89a" }}
           >
             Professional maintenance, health monitoring, and security auditing
             for Pardus and Debian-based Linux distributions.
@@ -52,7 +64,18 @@ export default function Hero() {
           >
             <a
               href="#install"
-              className="inline-flex items-center gap-2 rounded-full bg-forest-600 px-7 py-3 text-sm font-semibold text-white hover:bg-forest-700 transition-colors duration-200 shadow-lg shadow-forest-600/20"
+              className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors duration-200"
+              style={{
+                background: "#1a6b4a",
+                color: "#e8f5ee",
+                boxShadow: "0 4px 20px rgba(26, 107, 74, 0.3)",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "#2a9e6e")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "#1a6b4a")
+              }
             >
               <ArrowDown className="h-4 w-4" />
               Install Now
@@ -61,7 +84,20 @@ export default function Hero() {
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-surface-300 bg-surface-0 px-7 py-3 text-sm font-semibold text-ink-700 hover:bg-surface-50 hover:border-surface-300 transition-colors duration-200"
+              className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-colors duration-200"
+              style={{
+                background: "transparent",
+                border: "1px solid rgba(26, 107, 74, 0.3)",
+                color: "#8ab89a",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(26, 107, 74, 0.5)";
+                e.currentTarget.style.color = "#3dd68c";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(26, 107, 74, 0.3)";
+                e.currentTarget.style.color = "#8ab89a";
+              }}
             >
               <Github className="h-4 w-4" />
               View Source

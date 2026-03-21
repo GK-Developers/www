@@ -1,29 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-forest-50: #e8f5ee;
-  --color-forest-100: #c8e6d4;
-  --color-forest-200: #a3d4b6;
-  --color-forest-300: #7cc298;
-  --color-forest-400: #5eb382;
-  --color-forest-500: #3fa36c;
-  --color-forest-600: #1a6b4a;
-  --color-forest-700: #15573d;
-  --color-forest-800: #104430;
-  --color-forest-900: #0b3123;
+  /* Aurora dark palette */
+  --color-base: #0d1a14;
+  --color-base-soft: #111f18;
+  --color-base-raised: #162318;
+  --color-base-border: rgba(26, 107, 74, 0.15);
 
-  --color-surface-0: #ffffff;
-  --color-surface-50: #fafbfa;
-  --color-surface-100: #f3f5f4;
-  --color-surface-200: #e8ebe9;
-  --color-surface-300: #d1d6d3;
+  /* Forest green light system */
+  --color-forest-dim: rgba(26, 107, 74, 0.08);
+  --color-forest-glow: rgba(26, 107, 74, 0.20);
+  --color-forest-mid: rgba(26, 107, 74, 0.50);
+  --color-forest-full: #1a6b4a;
+  --color-forest-bright: #2a9e6e;
+  --color-forest-vivid: #3dd68c;
 
-  --color-ink-900: #1a1f1c;
-  --color-ink-700: #2d3630;
-  --color-ink-500: #4a5650;
-  --color-ink-400: #6b7a72;
-  --color-ink-300: #8b9990;
-  --color-ink-200: #b0bbb4;
+  /* Text */
+  --color-text-primary: #e8f5ee;
+  --color-text-secondary: #8ab89a;
+  --color-text-muted: #4a6b57;
+
+  /* Glass */
+  --color-glass-bg: rgba(13, 26, 20, 0.60);
+  --color-glass-border: rgba(26, 107, 74, 0.20);
 
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
@@ -34,24 +33,55 @@ html {
 }
 
 body {
-  color: var(--color-ink-900);
-  background: #ffffff;
+  color: var(--color-text-primary);
+  background: var(--color-base);
   font-family: var(--font-body);
 }
 
-/* Global grain texture overlay */
+/* Aurora background — three layered radial glows that slowly drift */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(26, 107, 74, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(26, 107, 74, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(26, 107, 74, 0.06) 0%, transparent 50%);
+  animation: auroraShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+  0%   { opacity: 0.7; transform: scale(1) translateY(0px); }
+  33%  { opacity: 1;   transform: scale(1.05) translateY(-20px); }
+  66%  { opacity: 0.8; transform: scale(0.98) translateY(10px); }
+  100% { opacity: 1;   transform: scale(1.03) translateY(-10px); }
+}
+
+/* Grain overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
+main {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
 ::selection {
-  background-color: var(--color-forest-100);
-  color: var(--color-forest-800);
+  background-color: rgba(26, 107, 74, 0.3);
+  color: #3dd68c;
 }

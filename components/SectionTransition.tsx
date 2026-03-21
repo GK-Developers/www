@@ -1,5 +1,4 @@
 "use client";
-
 import { useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -8,38 +7,33 @@ interface SectionTransitionProps {
   id?: string;
 }
 
-export default function SectionTransition({
-  children,
-  id,
-}: SectionTransitionProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
+export default function SectionTransition({ children, id }: SectionTransitionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 95%", "start 20%"],
+    target: containerRef,
+    offset: ["start 100%", "start 10%"],
   });
 
-  const clipPath = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["inset(0% 0% 100% 0%)", "inset(0% 0% 0% 0%)"]
-  );
-
-  const opacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [140, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+  const blur = useTransform(scrollYProgress, [0, 0.35], [16, 0]);
+  const blurFilter = useTransform(blur, (v) => `blur(${v}px)`);
 
   return (
-    <motion.div
-      ref={ref}
-      id={id}
-      style={{
-        clipPath,
-        opacity,
-        overflow: "hidden",
-        willChange: "clip-path",
-        position: "relative",
-      }}
-    >
-      {children}
-    </motion.div>
+    <div ref={containerRef} id={id}>
+      <motion.div
+        style={{
+          y,
+          opacity,
+          scale,
+          filter: blurFilter,
+          willChange: "transform, opacity, filter",
+          transformOrigin: "center bottom",
+        }}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }

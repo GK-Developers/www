@@ -61,10 +61,10 @@ function WireframeSphere() {
       <mesh ref={outerRef}>
         <sphereGeometry args={[2.2, 32, 32]} />
         <meshBasicMaterial
-          color="#1a6b4a"
+          color="#3dd68c"
           wireframe
           transparent
-          opacity={0.15}
+          opacity={0.18}
         />
       </mesh>
 
@@ -72,17 +72,17 @@ function WireframeSphere() {
       <mesh ref={innerRef}>
         <sphereGeometry args={[1.4, 24, 24]} />
         <meshBasicMaterial
-          color="#1a6b4a"
+          color="#2a9e6e"
           wireframe
           transparent
-          opacity={0.08}
+          opacity={0.10}
         />
       </mesh>
 
       {/* Outer ring */}
       <mesh ref={torusRef}>
         <torusGeometry args={[2.8, 0.008, 16, 120]} />
-        <meshBasicMaterial color="#1a6b4a" transparent opacity={0.12} />
+        <meshBasicMaterial color="#1a6b4a" transparent opacity={0.20} />
       </mesh>
     </group>
   );
@@ -93,7 +93,7 @@ export default function HeroScene() {
     <Canvas
       camera={{ position: [0, 0, 5], fov: 75 }}
       dpr={[1, 1.5]}
-      gl={{ toneMapping: 0 }}
+      gl={{ toneMapping: 0, alpha: true }}
       frameloop="always"
       style={{
         position: "absolute",
@@ -102,8 +102,11 @@ export default function HeroScene() {
         height: "100%",
         zIndex: 0,
         pointerEvents: "none",
+        background: "transparent",
       }}
     >
+      <ambientLight intensity={0.1} />
+      <pointLight position={[5, 5, 5]} color="#3dd68c" intensity={0.5} />
       <WireframeSphere />
     </Canvas>
   );

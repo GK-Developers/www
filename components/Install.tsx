@@ -21,10 +21,7 @@ export default function Install() {
     <section
       id="install"
       className="py-28 lg:py-36"
-      style={{
-        background: "#fafafa",
-        borderLeft: "4px solid rgba(26,107,74,0.2)",
-      }}
+      style={{ background: "transparent" }}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
@@ -34,10 +31,16 @@ export default function Install() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
+          <h2
+            className="font-display text-3xl sm:text-4xl font-bold tracking-tight"
+            style={{ color: "#e8f5ee" }}
+          >
             Get Started in Minutes
           </h2>
-          <p className="mt-4 text-lg text-ink-400 leading-relaxed">
+          <p
+            className="mt-4 text-lg leading-relaxed"
+            style={{ color: "#8ab89a" }}
+          >
             Choose your distribution and follow the steps below.
           </p>
         </motion.div>
@@ -58,11 +61,19 @@ export default function Install() {
                   setActiveTab(i);
                   setCopied(false);
                 }}
-                className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-200 cursor-pointer ${
-                  activeTab === i
-                    ? "bg-[#1e293b] text-white"
-                    : "bg-surface-100 text-ink-400 hover:text-ink-700 hover:bg-surface-200"
-                }`}
+                className="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-200 cursor-pointer"
+                style={{
+                  background:
+                    activeTab === i
+                      ? "rgba(26, 107, 74, 0.25)"
+                      : "rgba(13, 26, 20, 0.60)",
+                  border:
+                    activeTab === i
+                      ? "1px solid #3dd68c"
+                      : "1px solid rgba(26, 107, 74, 0.20)",
+                  borderBottom: "none",
+                  color: activeTab === i ? "#3dd68c" : "#8ab89a",
+                }}
               >
                 {tab.label}
               </button>
@@ -70,14 +81,25 @@ export default function Install() {
           </div>
 
           {/* Code Block */}
-          <div className="relative rounded-b-xl rounded-tr-xl bg-[#1e293b] overflow-hidden">
+          <div
+            className="relative overflow-hidden"
+            style={{
+              background: "rgba(5, 12, 8, 0.90)",
+              borderRadius: "0 12px 12px 12px",
+              border: "1px solid rgba(26, 107, 74, 0.20)",
+            }}
+          >
             <button
               onClick={handleCopy}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-white/10 text-white/60 hover:bg-white/20 hover:text-white transition-colors duration-200 cursor-pointer"
+              className="absolute top-4 right-4 p-2 rounded-lg transition-colors duration-200 cursor-pointer"
+              style={{
+                background: "rgba(26, 107, 74, 0.15)",
+                color: copied ? "#3dd68c" : "#8ab89a",
+              }}
               aria-label="Copy install commands"
             >
               {copied ? (
-                <Check className="h-4 w-4 text-forest-400" />
+                <Check className="h-4 w-4" />
               ) : (
                 <Copy className="h-4 w-4" />
               )}
@@ -87,8 +109,13 @@ export default function Install() {
               <code className="text-sm font-mono leading-7">
                 {INSTALL_TABS[activeTab].commands.map((cmd, i) => (
                   <span key={i} className="block">
-                    <span className="text-forest-400 select-none">$ </span>
-                    <span className="text-gray-200">{cmd}</span>
+                    <span
+                      className="select-none"
+                      style={{ color: "#3dd68c" }}
+                    >
+                      ${" "}
+                    </span>
+                    <span style={{ color: "#3dd68c" }}>{cmd}</span>
                   </span>
                 ))}
               </code>
