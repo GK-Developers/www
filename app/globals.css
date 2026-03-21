@@ -55,3 +55,14 @@ body::before {
   background-color: var(--color-forest-100);
   color: var(--color-forest-800);
 }
+
+/* Parallax depth feel between sections */
+main {
+  overflow: hidden;
+}
+
+/* Smooth section entrance base */
+section {
+  position: relative;
+}
+
