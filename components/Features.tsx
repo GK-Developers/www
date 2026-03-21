@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { FEATURES } from "@/lib/constants";
 import type { LucideIcon } from "lucide-react";
+import AuroraBackground from "./AuroraBackground";
 
 const iconMap: Record<string, LucideIcon> = {
   Trash2,
@@ -44,8 +45,9 @@ export default function Features() {
     <section
       id="features"
       className="relative py-28 lg:py-36"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", position: "relative", overflow: "hidden" }}
     >
+      <AuroraBackground intensity={0.8} />
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

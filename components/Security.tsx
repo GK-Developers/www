@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { SECURITY_PRINCIPLES } from "@/lib/constants";
+import AuroraBackground from "./AuroraBackground";
 
 const containerVariants = {
   hidden: {},
@@ -27,8 +28,9 @@ export default function Security() {
     <section
       id="security"
       className="relative py-28 lg:py-36 overflow-hidden"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", position: "relative", overflow: "hidden" }}
     >
+      <AuroraBackground intensity={0.8} />
       {/* Large aurora blob — top-right atmosphere */}
       <div
         className="absolute pointer-events-none"
